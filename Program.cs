@@ -39,6 +39,8 @@ Console.WriteLine("[*] Waiting for messages...");
 EventingBasicConsumer consumer = new(channel);
 consumer.Received += async (model, ea) =>
 {
+  var startTime = DateTime.Now;
+
   await using var conn = new NpgsqlConnection(connString);
   await conn.OpenAsync();
 
@@ -141,6 +143,9 @@ consumer.Received += async (model, ea) =>
     fileReader.Close();
   }
   channel.BasicAck(ea.DeliveryTag, false);
+
+  var endTime = DateTime.Now;
+  Console.WriteLine($"Execution time: {(endTime - startTime).TotalMilliseconds}ms");
 
   try
   {
