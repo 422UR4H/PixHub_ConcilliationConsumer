@@ -27,19 +27,19 @@ public class Transaction(int batchSize)
     DifferentStatus.Add(dbData.TransactionId);
   }
 
-  public void CheckStatusAndManageFileData(FileTransactionDTO dbData)
+  public void CheckStatusAndManageFileData(FileTransactionDTO fileData)
   {
-    DatabaseToFile.TryGetValue(dbData.Id, out string? status);
+    DatabaseToFile.TryGetValue(fileData.Id, out string? status);
     if (status is null)
     {
-      FileToDatabase.Add(dbData.Id, dbData.Status);
+      FileToDatabase.Add(fileData.Id, fileData.Status);
       return;
     }
-    if (status == dbData.Status)
+    if (status == fileData.Status)
     {
-      DatabaseToFile.Remove(dbData.Id);
+      DatabaseToFile.Remove(fileData.Id);
       return;
     }
-    DifferentStatus.Add(dbData.Id);
+    DifferentStatus.Add(fileData.Id);
   }
 }
