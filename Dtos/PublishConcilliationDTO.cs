@@ -2,10 +2,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ConcilliationConsumer.Dtos;
 
-public class PublishConcilliationDTO(int paymentProviderId, DateTime date, string file, string postback)
+public class PublishConcilliationDTO(long paymentProviderId, DateTime date, string file, string postback)
 {
   [Required(ErrorMessage = "Field paymentProviderId is mandatory")]
-  public int PaymentProviderId { get; } = paymentProviderId;
+  public long PaymentProviderId { get; } = paymentProviderId;
   
   [DataType(DataType.Date)]
   [Required(ErrorMessage = "Field date is mandatory")]
