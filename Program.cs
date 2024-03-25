@@ -32,6 +32,8 @@ channel.QueueDeclare(
   arguments: null
 );
 
+const int AMOUNT_BATCHES = 5;
+const int MAX_BATCH_SIZE = 800_000;
 const int MIN_BATCH_SIZE = 200_000;
 
 Console.WriteLine("[*] Waiting for messages...");
@@ -90,9 +92,10 @@ consumer.Received += async (model, ea) =>
       return;
     }
   }
-  // refactor this magic number
-  batchSize /= 5;
+
+  batchSize /= AMOUNT_BATCHES;
   if (batchSize < MIN_BATCH_SIZE) batchSize = MIN_BATCH_SIZE;
+  if (batchSize > MAX_BATCH_SIZE) batchSize = MAX_BATCH_SIZE;
   Transaction transactions = new(batchSize);
 
   sqlString = @"
