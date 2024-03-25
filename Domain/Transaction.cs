@@ -22,8 +22,6 @@ public class Transaction(int batchSize)
       FileToDatabase.Remove(dbData.TransactionId);
       return;
     }
-
-    // TODO: refactor to save in file
     DifferentStatus.Add(dbData.TransactionId);
   }
 
