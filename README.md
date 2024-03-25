@@ -12,6 +12,8 @@ It is also part of the processing part of the processing of the logic of the PIX
 
 ## Quick start
 
+Note: you need dotnet installed to run this consumer!
+
 Clone the repository:
 
 `git clone https://github.com/422UR4H/PixHub_ConcilliationConsumer`
