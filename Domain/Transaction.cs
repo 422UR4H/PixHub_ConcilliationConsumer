@@ -17,12 +17,11 @@ public class Transaction(int batchSize)
       DatabaseToFile.Add(dbData.TransactionId, dbData.Status);
       return;
     }
-    if (status == dbData.Status)
+    if (status != dbData.Status)
     {
-      FileToDatabase.Remove(dbData.TransactionId);
-      return;
+      DifferentStatus.Add(dbData.TransactionId);
     }
-    DifferentStatus.Add(dbData.TransactionId);
+    FileToDatabase.Remove(dbData.TransactionId);
   }
 
   public void CheckStatusAndManageFileData(FileTransactionDTO fileData)
@@ -33,11 +32,10 @@ public class Transaction(int batchSize)
       FileToDatabase.Add(fileData.Id, fileData.Status);
       return;
     }
-    if (status == fileData.Status)
+    if (status != fileData.Status)
     {
-      DatabaseToFile.Remove(fileData.Id);
-      return;
+      DifferentStatus.Add(fileData.Id);
     }
-    DifferentStatus.Add(fileData.Id);
+    DatabaseToFile.Remove(fileData.Id);
   }
 }
