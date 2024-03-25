@@ -156,7 +156,6 @@ consumer.Received += async (model, ea) =>
   }
   catch
   {
-    // TODO: treat this case
     Console.WriteLine("Rota inválida para o PaymentProviderId: " + dto.PaymentProviderId);
   }
 };
